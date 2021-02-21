@@ -1,4 +1,4 @@
-export const LOCALHOST = 'http://192.168.43.125:3001/'
+export const LOCALHOST = 'http://192.168.1.18:3001/'
 export const LOAD_USER = 'load_user'
 export const LOGIN = 'login_user'
 export const REGISTER='register_user'

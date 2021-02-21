@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,SectionList,SafeAreaView ,StyleSheet} from 'react-native';
+import { View, TextInput,SectionList,SafeAreaView ,StyleSheet} from 'react-native';
 import {connect } from 'react-redux'
 import {fetch_vocab} from '../../Action/VocabAction'
 import ItemVocab from './ItemVocab';
@@ -7,7 +7,9 @@ import ItemVocab from './ItemVocab';
 class ListVocab extends Component {
   constructor(props) {
     super(props);
-    
+    this.state={
+      search:''
+    }
   }
    
   
@@ -15,8 +17,10 @@ async componentDidMount (){
   const { category} =await this.props.route.params
     this.props.fetch_vocab(category)
 }
-VocabItem(vocabs){
-  return Array.isArray(vocabs)&&vocabs.map((vocab,i)=>{
+VocabItem(vocabs=[]){
+  let filterVocabs = vocabs.filter(vocab=>vocab.word.toLowerCase().indexOf(this.state.search.toLocaleLowerCase())!==-1);
+  console.log(filterVocabs);
+  return filterVocabs.map((vocab,i)=>{
     return <ItemVocab key={i} vocabs={vocab} />
   })
 }
@@ -26,6 +30,9 @@ VocabItem(vocabs){
   
     return (
         <View>
+          <TextInput onChangeText={text=>this.setState({search:text})} value={this.state.search}
+          placeholder="ค้นหาคำศัพท์"
+          />
           {this.VocabItem(vocabs)}
         </View>
       );

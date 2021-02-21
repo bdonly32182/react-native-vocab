@@ -12,7 +12,6 @@ class HomeVocab extends Component {
     const {navigate} = this.props.navigation
     return (
       <View>
-        <Text> HomeVocab </Text>
         <Button title="Toeic" onPress={()=> navigate('ListVocab',{category:'Toeic'})}></Button>
         <Button title="Toeft" onPress={()=> navigate('ListVocab',{category:'Toeft'})}></Button>
         <Button title="Tu-gep" onPress={()=> navigate('ListVocab',{category:'Tu-gep'})}></Button>

@@ -14,7 +14,7 @@ class HomeAnswer extends Component {
     return (
       <View>
         <Button title="Toeic" onPress={()=> navigate('ListAnswer',{category:'Toeic'})}></Button>
-        <Button title="Toeft" onPress={()=> navigate('ListAnswer',{category:'Toeft'})}></Button>
+        <Button title="Toefl" onPress={()=> navigate('ListAnswer',{category:'Toefl'})}></Button>
         <Button title="Tu-gep" onPress={()=> navigate('ListAnswer',{category:'Tu-gep'})}></Button>
         <Button title="Cu-tep" onPress={()=> navigate('ListAnswer',{category:'Cu-tep'})}></Button>
 

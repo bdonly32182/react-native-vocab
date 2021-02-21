@@ -1,33 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useIsFocused} from '@react-navigation/native'
 import {useDispatch,useSelector} from 'react-redux'
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button,Modal ,TouchableHighlight} from 'react-native';
 import {logout,load_user} from '../../Action/UserAction'
-// import AsyncStorage from '@react-native-community/async-storage'
+import Login from '../Auth/Login';
+import AsyncStorage from '@react-native-community/async-storage'
 
 function Profile(props) {
-const dispatch =useDispatch()
-const users = useSelector(state=> state.users)
-
+const dispatch =useDispatch();
+const users = useSelector(state=> state.users);
+const [visible,setVisible] = useState(true);
+const [register,setRegister] = useState(false);
 useEffect(() => {
-  const unsubscribe = props.navigation.addListener('focus', () => {
+  const unsubscribe = props.navigation.addListener('focus', async() => {
     // do something
-    dispatch(load_user())
+    let token =await AsyncStorage.getItem('token')
+   users.length>0||token?dispatch(load_user())&&setVisible(false):setVisible(true);
   });
-
+  
   return unsubscribe;
-}, [props.navigation]);
+}, [props.navigation,users,visible]);
 
   return(
     <View>
-      {users.user &&
+      {users.user ?
       <View>
       <Text>E-mail : {users.user.email}</Text>
       <Text>Name : {users.user.name}</Text>
         <Button title="Log out " onPress={()=> dispatch(logout(props.navigation))}></Button>
 
       </View>
-      
+      :
+      <View>
+        <Modal  animationType="fade"
+                transparent={true}
+                visible={visible}
+                onRequestClose={() => {
+                  Alert.alert("Modal has been closed.");
+                }}
+        >
+          <Login />
+                   
+        </Modal>
+      </View>
       }
       
 

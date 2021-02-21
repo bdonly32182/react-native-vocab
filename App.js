@@ -59,7 +59,7 @@ const Tab = createBottomTabNavigator();
        <Tab.Screen name="Homes" component={MyStack} />
       <Tab.Screen name="Vocabmark" component={VocabMark} />
       <Tab.Screen name="Profile" component ={Profile}/>
-      <Tab.Screen name="auth" component ={AuthStack}/>
+      {/* <Tab.Screen name="auth" component ={AuthStack}/> */}
 
     </Tab.Navigator>
   );

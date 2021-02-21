@@ -5,7 +5,7 @@ export const login=(email,password,nav)=>async dispatch =>{
     const result = await axios.post(LOCALHOST+'login',{email,password})
                     if (result.data.token) {
                         AsyncStorage.setItem('token',result.data.token)
-                        nav.navigate('Homes')
+                        // nav.navigate('Homes')
                         dispatch({type:LOGIN,payload:result.data})
                     } else {
                         dispatch({type:'login_fail',payload:result.data})
